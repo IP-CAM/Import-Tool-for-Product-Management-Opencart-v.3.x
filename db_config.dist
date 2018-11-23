@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Contents database connection credentials
+ * 
+ * PHP version 7
+ * 
+ * @category Config_File
+ * @package  oc_products_json
+ * @author   Oleg Kholyk <oleg@kholyk.ru>
+ * 
+ * 
+ * 
+ * 
+ */
+
+
+// Database requests handling
+$host = 'localhost';
+$db   = 'db_name';
+$user = 'db_username';
+$pass = 'YourStrongPas5w0rD';
+$charset = 'utf8mb4';
