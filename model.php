@@ -201,7 +201,8 @@ function putProduct($product)
     $stmt = $pdo->prepare($oc_product_sql);
     $stmt->execute(
         [
-            $product['sku'], $product['sku'],
+            $product['sku'] . '_' . $product['warehouse'],
+            $product['sku'],
             $product['warehouse'],
             $product['quantity'], $manufacturerId,
             $product['pr_0']
