@@ -120,6 +120,7 @@ function updateProduct($product)
     global $pdo, $currentID, $manufacturers, $priceToGroup, $mainCategory;
     global $mainStore, $mainLayout;
     $manufacturerId = $manufacturers[$product['manufacturer']];
+    $currentModel = $product['sku'] . '_' . $product['warehouse'];
     
 
     // 1: Update product line itself
@@ -132,7 +133,7 @@ function updateProduct($product)
             $product['quantity'],
             $product['pr_0'],
             $manufacturerId,
-            $product['sku']
+            $currentModel
         ]
     );
     
@@ -163,7 +164,12 @@ function updateProduct($product)
     // Update URL alias
     $seoURL_sql = "UPDATE `oc_seo_url` SET `keyword` = ? WHERE `query` = ?;";
     $stmt = $pdo->prepare($seoURL_sql);
-    $stmt->execute([$product['sku'], "product_" . $currentID]);
+    $stmt->execute(
+        [
+            $currentModel,
+            "product_" . $currentID,
+        ]
+    );
 }
 
 /**
@@ -276,7 +282,7 @@ function putProduct($product)
     $stmt = $pdo->prepare($oc_seo_url_sql);
     $stmt->execute(
         [
-            $mainStore, $currentQuery, $product['sku']
+            $mainStore, $currentQuery, $product['sku'] . '_' . $product['warehouse'],
         ]
     );
     return $lastAddedID;
