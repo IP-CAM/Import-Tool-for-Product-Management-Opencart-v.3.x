@@ -173,6 +173,49 @@ function updateProduct($product)
 }
 
 /**
+ * Updates product tables: main (1) [STOCK]
+ * (2,3,4,5,6,7) are skipped here
+ * Uses $currentID as global
+ * 
+ * @param array $product data from JSON
+ *                       Example of single JSON product item:
+ *                       "7700500168": {
+ *                       "sku": "7700500168",
+ *                       "warehouse": "msk",
+ *                       "manufacturer": "MOTRIO",
+ *                       "name": "СВЕЧА 3АЖИГАНИЯ (224013682R)",
+ *                       "pr_3": 101,
+ *                       "pr_2": 201,
+ *                       "pr_1": 301,
+ *                       "pr_0": 401,
+ *                       "quantity": 501
+ *                       },
+ * 
+ * @return void
+ */
+function updateProductStock($product)
+{
+    global $pdo, $currentID, $manufacturers, $priceToGroup, $mainCategory;
+    global $mainStore, $mainLayout;
+    if (array_key_exists('manufacturer', $product)) {
+        $manufacturerId = $manufacturers[$product['manufacturer']];
+    }
+
+    $currentModel = $product['sku'] . '_' . $product['warehouse'];
+    
+
+    // 1: Update product line itself
+    $oc_product_sql = "UPDATE oc_product SET quantity = ?, date_modified = CURRENT_DATE() WHERE model = ?;";
+    $stmt = $pdo->prepare($oc_product_sql);
+    $stmt->execute(
+        [
+            $product['quantity'],
+            $currentModel
+        ]
+    );
+}
+
+/**
  * Creates product tables: main (1) and 6 dependent (2,3,4,5,6,7)
  * Uses $currentID as global
  * 
