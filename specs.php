@@ -12,6 +12,19 @@
         'RENAULT' => 11,
         'Motrio'  => 12,
         'MOTRIO'  => 12,
+        'Elf'  => 13,
+        'ELF'  => 13,
+        '1new'  => 14,
+        '1NEW'  => 14,
+        'Automate'  => 15,
+        'AutoMate'  => 15,
+        'AUTOMATE'  => 15,
+        'Shell'  => 16,
+        'SHELL'  => 16,
+        'Total'  => 17,
+        'TOTAL'  => 17,
+        'Nissan'  => 18,
+        'NISSAN'  => 18,
     ];
 
     $priceToGroup = [

@@ -173,6 +173,27 @@ function updateProduct($product)
 }
 
 /**
+ * Sets product quantity to 0 (Zero) according to warehouse
+ * (2,3,4,5,6,7) are skipped here
+ * Uses $currentID as global
+ * 
+ * @param string $warehouse
+ * 
+ * @return void
+ */
+function setZeroQuantityFor($warehouse)
+{
+    global $pdo;
+
+    echo('zeroing quantities for' . $warehouse . "\n");
+
+    $setQtyToNull_sql = "UPDATE oc_product SET quantity = 0 WHERE mpn = ?;";
+    $pdo->prepare($setQtyToNull_sql)->execute([$warehouse]);
+
+    echo('zeroing complete!' . "\n");
+}
+
+/**
  * Updates product tables: main (1) [STOCK]
  * (2,3,4,5,6,7) are skipped here
  * Uses $currentID as global
