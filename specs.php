@@ -1,7 +1,7 @@
 <?php
 /**
  * Contains current shop
- * 
+ *
  * @author Oleg Kholyk <oleg@kholyk.ru>
  */
     // Database specific constants
@@ -25,6 +25,8 @@
         'TOTAL'  => 17,
         'Nissan'  => 18,
         'NISSAN'  => 18,
+        'vag'  => 19,
+        'VAG'  => 19,
     ];
 
     $priceToGroup = [
